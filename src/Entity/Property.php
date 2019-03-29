@@ -3,12 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Cocur\Slugify\Slugify;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PropertyRepository")
+ * @UniqueEntity("title")
  */
 class Property
 {
+
+    CONST HEAT = [ 0 => 'electric', 1 =>'gaz'];
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -18,6 +24,8 @@ class Property
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=5, max=255)
+     *
      */
     private $title;
 
@@ -43,6 +51,7 @@ class Property
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(min=10, max=400)
      */
     private $surface;
 
@@ -63,6 +72,7 @@ class Property
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex("/^[0-9]{5}$/")
      */
     private $postal_code;
 
@@ -76,10 +86,18 @@ class Property
      */
     private $bedroom;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $rooms;
+
 
     public function __construct()
     {
-       $this->created_at = new \DateTime;
+        try {
+            $this->created_at = new \DateTime;
+        } catch (\Exception $e) {
+        }
     }
 
 
@@ -98,6 +116,10 @@ class Property
         $this->title = $title;
 
         return $this;
+    }
+    public function getSlug():string
+    {
+        return (new Slugify())->slugify($this->title);
     }
 
     public function getDescription(): ?string
@@ -176,6 +198,9 @@ class Property
 
         return $this;
     }
+    public function getHeatType():string {
+        return self::HEAT[$this->heat];
+    }
 
     public function getSold(): ?bool
     {
@@ -233,6 +258,18 @@ class Property
     public function setBedroom(int $bedroom): self
     {
         $this->bedroom = $bedroom;
+
+        return $this;
+    }
+
+    public function getRooms(): ?string
+    {
+        return $this->rooms;
+    }
+
+    public function setRooms(string $rooms): self
+    {
+        $this->rooms = $rooms;
 
         return $this;
     }
