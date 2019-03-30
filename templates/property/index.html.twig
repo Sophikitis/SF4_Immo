@@ -4,8 +4,20 @@
 {% block title 'Tous nos biens' %}
 
 {% block body %}
-    <div class="container">
+    <div class="container mt-4">
         <h1> Voir tous nos bien </h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos eos expedita laborum nobis quia voluptates. Amet assumenda atque, aut autem deleniti distinctio dolores eos harum impedit labore rerum tenetur velit?</p>
+        <div class="row">
+            {% for property in properties %}
+                <div class="col-md-4">
+                    {% include 'property/_property.html.twig' %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="pagination">
+            {{ knp_pagination_render(properties) }}
+        </div>
     </div>
+
+
 {% endblock %}
