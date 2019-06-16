@@ -98,6 +98,31 @@ class Property
      */
     private $options;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated_at;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="property", orphanRemoval=true, cascade={"persist"})
+     */
+    private $pictures;
+
+
+    /**
+     * @Assert\All({
+     *   @Assert\Image(
+     *     maxSize="1000k",
+     *     maxSizeMessage="Le fichier excède 1000Ko.",
+     *     mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"},
+     *     mimeTypesMessage= "formats autorisés: png, jpeg, jpg, gif"
+     * )
+     * })
+     */
+    private $pictureFiles;
+
+
+
 
     public function __construct()
     {
@@ -106,6 +131,7 @@ class Property
         } catch (\Exception $e) {
         }
         $this->options = new ArrayCollection();
+        $this->pictures = new ArrayCollection();
     }
 
 
@@ -309,4 +335,83 @@ class Property
 
         return $this;
     }
+
+
+
+
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Picture[]
+     */
+    public function getPictures(): Collection
+    {
+        return $this->pictures;
+    }
+
+    public function getPicture(): ?Picture
+    {
+        return $this->pictures->isEmpty() ? null : $this->pictures->first();
+    }
+
+    public function addPicture(Picture $picture): self
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures[] = $picture;
+            $picture->setProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Picture $picture): self
+    {
+        if ($this->pictures->contains($picture)) {
+            $this->pictures->removeElement($picture);
+            // set the owning side to null (unless already changed)
+            if ($picture->getProperty() === $this) {
+                $picture->setProperty(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPictureFiles()
+    {
+        return $this->pictureFiles;
+    }
+
+    /**
+     * @param mixed $pictureFiles
+     * @return Property
+     */
+    public function setPictureFiles($pictureFiles)
+    {
+        foreach ($pictureFiles as $pictureFile){
+            $picture = new Picture();
+            $picture->setImageFile($pictureFile);
+            $this->addPicture($picture);
+        }
+        $this->pictureFiles = $pictureFiles;
+        return $this;
+    }
+
+
+
+
 }

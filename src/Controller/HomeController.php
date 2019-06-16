@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\PropertySearch;
+use App\Form\PropertySearchType;
 use App\Repository\PropertyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class HomeController extends  AbstractController {
 
@@ -18,8 +22,10 @@ class HomeController extends  AbstractController {
         $properties = $property->findLatest();
 
 
+
         return $this->render('pages/home.html.twig', [
-            'properties' => $properties
+            'properties' => $properties,
+
         ]);
     }
 }

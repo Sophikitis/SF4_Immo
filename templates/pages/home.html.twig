@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title "L'agence tous risques" %}
+{% block title "Next immobilier" %}
 
 {% block body %}
-    <div class="jumbotron text-center">
-        <h1> Agence Baracuda</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos eos expedita laborum nobis quia voluptates. Amet assumenda atque, aut autem deleniti distinctio dolores eos harum impedit labore rerum tenetur velit?</p>
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img id="homeimg"  src="{{ '/images/villa.jpg' }}" alt="First slide">
+            </div>
+        </div>
     </div>
+
 
 
     <div class="container">
@@ -15,23 +19,19 @@
         <div class="row flex">
             {% for property in properties %}
                 <div class="col-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">{{ property.title }}</a>
-                            </h5>
-                            <p class="card-text">
-                                {{ property.city }} ({{ property.postalCode }})
-                            </p>
-
-                            <div class="text-primary">
-                                {{ property.formatedPrice }}€
-                            </div>
-                        </div>
-                    </div>
+                    {% include 'property/_property.html.twig' %}
                 </div>
 
             {% endfor %}
         </div>
     </div>
+
+
+    <style>
+        #homeimg{
+            height: 500px;
+            object-fit: cover;
+            width: 100%;
+        }
+    </style>
 {% endblock %}
