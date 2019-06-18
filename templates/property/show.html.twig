@@ -6,6 +6,71 @@
 
 
 {% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+
+    {% endfor %}
+
+    {% if not form.vars.valid %}
+        <div class="alert alert-danger">
+            Erreur formulaire
+        </div>
+    {% endif %}
+
+
+    {#<div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+            {% for picture in property.pictures %}
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index0 }}"  {% if loop.index0 == 0 %}class="active" {% endif %}></li>
+            {% endfor %}
+
+        </ol>
+
+        <div class="carousel-inner">
+            {% for picture in property.pictures %}
+
+                <div class="carousel-item  {% if loop.index0 == 0 %} active {% endif %}">
+                {%  if property.picture %}
+                    <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('thumb') }}" alt="d-block w-100" style="width: 100%; height:auto;">
+                {% else %}
+                    <img src="{{ '/images/properties/empty.jpg' | imagine_filter('medium') }}" alt="" class="d-block w-100" style="width: 100%;height: auto;">
+                {% endif %}
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>#}
+<div class="jumbotron">
+    <div class="container">
+        <div data-slider class="slider-nav">
+            {% if property.pictures is empty %}
+                <img src="{{ '/images/properties/empty.jpg' | imagine_filter('medium') }}" alt="" class="image-slider d-block w-100" >
+            {% else %}
+                {% for picture in property.pictures %}
+                    <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}" alt="" class="image-slider d-block w-100">
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{#
     <div class="jumbotron">
         <div class="container">
 
@@ -26,8 +91,8 @@
             <div class="row">
                 <div class="col-md-8">
 
-                    {%  if property.pictureFiles %}
-                        <img src="{{ vich_uploader_asset(property, 'imageFiles') | imagine_filter('medium') }}" alt="" class="card-img-top" style="width: 100%;height: auto;">
+                    {%  if property.picture %}
+                        <img src="{{ vich_uploader_asset(property.picture, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
 
                     {% else %}
                         <img src="{{ '/images/properties/empty.jpg' | imagine_filter('medium') }}" alt="" class="card-img-top" style="width: 100%;height: auto;">
@@ -66,6 +131,7 @@
             </div>
         </div>
     </div>
+#}
 
 
 
@@ -122,6 +188,9 @@
 
             </div>
         </div>
+
+        <div id="map" style="width: 100%; height: 400px" data-lat="{{ property.lat }}" data-lng="{{ property.lng }}"></div>
+
     </div>
 
 {% endblock %}

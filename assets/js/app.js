@@ -1,18 +1,90 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- */
+import Places from 'places.js';
+import Map from './modules/map.js';
+import  'slick-carousel';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 
-// any CSS you require will output into a single css file (app.css in this case)
+
+Map.init();
+
+let inputAddress = document.querySelector('#property_address');
+if(inputAddress !== null){
+    let place = Places({
+        container: inputAddress
+    });
+    place.on('change', e =>{
+        document.querySelector('#property_city').value =  e.suggestion.city;
+        document.querySelector('#property_postal_code').value =  e.suggestion.postcode;
+        document.querySelector('#property_lat').value =  e.suggestion.latlng.lat;
+        document.querySelector('#property_lng').value =  e.suggestion.latlng.lng;
+    })
+}
+
+let searchAddress = document.querySelector('#search_address');
+if(searchAddress !== null){
+    let place = Places({
+        container: searchAddress
+    });
+    place.on('change', e =>{
+        document.querySelector('#lat').value =  e.suggestion.latlng.lat;
+        document.querySelector('#lng').value =  e.suggestion.latlng.lng;
+    })
+}
+
+
+
+
+
+
+//Jquery
 var $ = require('jquery');
+
+// CSSS
 require('../css/app.css');
+require('../css/footer.css');
+
+// LIB JS
 require('select2');
 
-$('select').select2();
-let $contactButton = $('#contactButton');
 
+//slider
+$('[data-slider]').slick({
+    arrows: true,
+    infinite: true,
+    autoplay: true,
+    fade: true,
+    dots: true,
+    autoplaySpeed: 5000,
+    pauseOnHover: true
+});
+
+
+/*$('[data-slider]').slick({
+    dots: true,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 300,
+    slidesToShow: 1,
+    centerMode: false,
+    variableWidth: false,
+    fade: true,
+    cssEase: 'linear'
+});*/
+
+
+
+
+
+
+
+
+
+// select2
+$('select').select2();
+
+//contact
+let $contactButton = $('#contactButton');
 $contactButton.click(e =>{
     e.preventDefault();
     $('#contactForm').slideDown();
@@ -40,7 +112,10 @@ document.querySelectorAll('[data-delete]').forEach(a => {
             })
             .catch(e => alert(e))
     })
-})
+});
+
+
+
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');

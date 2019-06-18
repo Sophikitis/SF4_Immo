@@ -25,7 +25,6 @@ class PropertyController extends AbstractController {
 
     public function __construct(PropertyRepository $repository)
     {
-
         $this->repository = $repository;
     }
 
