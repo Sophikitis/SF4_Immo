@@ -19,6 +19,24 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+
+    /**
+     * @param $id integer
+     * @return User[]
+     */
+    public function allUsersWithoutCurrentAdmin($id):array
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.id != :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
+
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

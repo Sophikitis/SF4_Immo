@@ -10,6 +10,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, \Serializable
 {
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->setRoles(1);
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -27,6 +36,14 @@ class User implements UserInterface, \Serializable
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $roles;
+
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -56,6 +73,13 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+     public CONST ROLES = array(
+        0 => 'ROLE_SUPER_ADMIN',
+        1 => 'ROLE_ADMIN',
+        2 => 'ROLE_USER'
+     );
+
+
     /**
      * Returns the roles granted to the user.
      *
@@ -72,7 +96,8 @@ class User implements UserInterface, \Serializable
      */
     public function getRoles()
     {
-        return ['ROLE_ADMIN'];
+/*        return array('');*/
+        return array(self::ROLES[$this->roles]);
     }
 
     /**
@@ -125,5 +150,12 @@ class User implements UserInterface, \Serializable
     public function unserialize($serialized)
     {
         list($this->id, $this->username, $this->password) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    public function setRoles(int $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 }

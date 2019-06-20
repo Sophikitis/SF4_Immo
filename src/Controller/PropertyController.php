@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Entity\Property;
 use App\Entity\PropertySearch;
+use App\Entity\User;
 use App\Form\ContactType;
 use App\Form\PropertySearchType;
 use App\Notification\ContactNotification;
@@ -35,6 +36,7 @@ class PropertyController extends AbstractController {
      *
      **/
     public function index(PaginatorInterface $paginator, Request $request):Response{
+
 
         $search = new PropertySearch();
         $form = $this->createForm(PropertySearchType::class, $search);
