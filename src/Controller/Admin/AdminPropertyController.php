@@ -37,7 +37,7 @@ class AdminPropertyController extends  AbstractController {
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/admin", name="admin.property.index")
+     * @Route("/admin/property", name="admin.property.index")
      */
     public function index ()
     {
@@ -58,10 +58,10 @@ class AdminPropertyController extends  AbstractController {
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+
             $this->em->persist($property);
             $this->em->flush();
             $this->addFlash('success', 'create success');
-
             return $this->redirectToRoute('admin.property.index');
         }
         return $this->render('admin/property/new.html.twig', [
@@ -103,11 +103,10 @@ class AdminPropertyController extends  AbstractController {
     public function delete(Property $property, Request $request)
     {
         if ($this->isCsrfTokenValid('delete' . $property->getId(), $request->get('_token'))){
-            $this->em->persist($property);
+            $this->em->remove($property);
             $this->em->flush();
             $this->addFlash('success', 'delete success');
         }
-
         return $this->redirectToRoute('admin.property.index');
     }
 

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title "Admin menu" %}
+
+{% block body %}
+    <div class="container mt-4 mb-4">
+        <h1>Gerer les biens</h1>
+
+        <div class="row">
+            <a href="{{ path('admin.users.index') }}" class="btn btn-primary btn-lg btn-block">Gestion des utilisateurs</a>
+            <a href="{{ path('admin.property.index') }}" class="btn btn-primary btn-lg btn-block">Gestion des biens immobiliers</a>
+        </div>
+
+
+    </div>
+
+
+
+
+
+{% endblock %}
