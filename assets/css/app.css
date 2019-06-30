@@ -6,3 +6,23 @@ body {
     height: 400px;
     width: 100%;
 }
+
+/*home controller*/
+#formSearchHome{
+    justify-content: center;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: flex-end;
+    margin: 0 100px 0 100px;
+    padding-right: 10px;
+}
+
+#formSearchHome form {
+
+    background: rgba(245, 245, 245, 0.44);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
