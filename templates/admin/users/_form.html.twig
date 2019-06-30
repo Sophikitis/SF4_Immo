@@ -1,31 +1,20 @@
 {{ form_start((form)) }}
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-12">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-md-6">{{ form_row(form.username) }}</div>
         </div>
-
-
-        {% if(edit and not god) %}
-        <div class="row">
-            <div class="col-md-6">
-                <label for="oldPassword" >
-                    Ancien mot de passe
-                    <input type="password" name="oldPassword" value="">
-                </label>
-            </div>
-        </div>
-        {% endif %}
-
-
-
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-md-6">{{ form_row(form.password) }}</div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4">{{ form_rest(form) }}</div>
         </div>
 
     </div>
 </div>
-
 {{ form_rest(form) }}
-<button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>
+<div class="text-center" >
+    <button class="btn btn-primary justify-content-center">{{ button|default('Enregistrer') }}</button>
+</div>
 {{ form_end(form) }}

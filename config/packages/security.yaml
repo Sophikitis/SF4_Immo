@@ -15,29 +15,20 @@ security:
                 path: /logout
                 target: /
 
-            # activate different ways to authenticate
-
-            # http_basic: true
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
 
             form_login:
                 check_path: login
-            # https://symfony.com/doc/current/security/form_login_setup.html
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_ADMIN
-        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_SUPER_ADMIN]
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
 
 
+    access_denied_url: /login
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/admin/users, roles: ROLE_SUPER_ADMIN }
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/admin, roles: ROLE_SUPER_ADMIN }
-
-
-        # - { path: ^/profile, roles: ROLE_USER }
 
     encoders:
         App\Entity\User:

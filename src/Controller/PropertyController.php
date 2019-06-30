@@ -32,16 +32,17 @@ class PropertyController extends AbstractController {
 
     /**
      * @Route("/biens", name="property.index")
+     * @param PaginatorInterface $paginator
+     * @param Request $request
      * @return Response
      *
-     **/
+     */
     public function index(PaginatorInterface $paginator, Request $request):Response{
 
 
         $search = new PropertySearch();
         $form = $this->createForm(PropertySearchType::class, $search);
         $form->handleRequest($request);
-
 
 
         $properties = $paginator->paginate($this->repository->findAllVisibleQuery($search),
@@ -80,12 +81,7 @@ class PropertyController extends AbstractController {
         if($form->isSubmitted() && $form->isValid()){
             $notification->notify($contact);
             $this->addFlash('success', 'votre email a bien été envoyé');
-            /*
-            return $this->redirectToRoute('property.show', [
-                'id' => $property->getId(),
-                'slug' => $property->getSlug()
-            ]);
-            */
+
             }
 
 

@@ -8,10 +8,7 @@
 
     <div class="container mt-4">
         <h2>Editer un utilisateur</h2>
-        {% if(god) %}
-        <span style="color: red;">SUPER ADMIN : ON</span>
-        {% endif %}
-        {{  include('admin/users/_form.html.twig', { form: form, button: 'Editer', edit:true, god: god}) }}
+        {{  include('admin/users/_form.html.twig', { form: form, button: 'Editer', edit:true}) }}
     </div>
 {% endblock %}
 

@@ -14,10 +14,10 @@ class User implements UserInterface, \Serializable
     /**
      * User constructor.
      */
-    public function __construct()
+   /* public function __construct()
     {
         $this->setRoles(1);
-    }
+    }*/
 
     /**
      * @ORM\Id()
@@ -37,9 +37,9 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="json")
      */
-    private $roles;
+    private $roles = [];
 
     /**
      * @return int|null
@@ -71,33 +71,6 @@ class User implements UserInterface, \Serializable
         $this->password = $password;
 
         return $this;
-    }
-
-     public CONST ROLES = array(
-        0 => 'ROLE_SUPER_ADMIN',
-        1 => 'ROLE_ADMIN',
-        2 => 'ROLE_USER'
-     );
-
-
-    /**
-     * Returns the roles granted to the user.
-     *
-     *     public function getRoles()
-     *     {
-     *         return array('ROLE_USER');
-     *     }
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
-     * @return (Role|string)[] The user roles
-     */
-    public function getRoles()
-    {
-/*        return array('');*/
-        return array(self::ROLES[$this->roles]);
     }
 
     /**
@@ -152,10 +125,49 @@ class User implements UserInterface, \Serializable
         list($this->id, $this->username, $this->password) = unserialize($serialized, ['allowed_classes' => false]);
     }
 
-    public function setRoles(int $roles): self
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
         return $this;
     }
+
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     *     public function getRoles()
+     *     {
+     *         return array('ROLE_USER');
+     *     }
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    /**
+     * Returns the roles granted to the user.
+     *
+     *     public function getRoles()
+     *     {
+     *         return array('ROLE_USER');
+     *     }
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return array (Role|string)[] The user roles
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
 }

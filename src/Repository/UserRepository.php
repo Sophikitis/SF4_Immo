@@ -24,7 +24,7 @@ class UserRepository extends ServiceEntityRepository
      * @param $id integer
      * @return User[]
      */
-    public function allUsersWithoutCurrentAdmin($id):array
+    public function allUsersWithoutId($id):array
     {
         return $this->createQueryBuilder('u')
             ->where('u.id != :id')

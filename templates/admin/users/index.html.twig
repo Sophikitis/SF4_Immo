@@ -4,7 +4,7 @@
 {% block title "Gestion des utilisateurs" %}
 
 {% block body %}
-    <div class="container mt-4">
+    <div class="container mt-4 mb-4">
         <h1>Gestion des utilisateurs </h1>
 
         {% for message in app.flashes('success') %}
@@ -13,6 +13,9 @@
             </div>
 
         {% endfor %}
+        <div class="text-right">
+            <a href="{{ path('admin.users.new')}}" class="btn btn-primary">Creer un utilisateur</a>
+        </div>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -37,9 +40,6 @@
             {% endfor %}
             </tbody>
         </table>
-        <div class="text-right">
-            <a href="{{ path('admin.users.new')}}" class="btn btn-primary">Creer un utilisateur</a>
-        </div>
     </div>
 
 

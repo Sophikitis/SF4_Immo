@@ -47,6 +47,7 @@ require('../css/footer.css');
 require('select2');
 
 
+
 //slider
 $('[data-slider]').slick({
     arrows: true,
@@ -81,7 +82,12 @@ $('[data-slider]').slick({
 
 
 // select2
-$('select').select2();
+$('select').select2(
+    {
+        placeholder: "Select a state",
+        allowClear: true
+    }
+);
 
 //contact
 let $contactButton = $('#contactButton');

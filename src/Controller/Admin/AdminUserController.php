@@ -28,7 +28,6 @@ class AdminUserController extends  AbstractController {
      * @var ObjectManager
      */
     private $em;
-
     /**
      * AdminPropertyController constructor.
      * @param UserRepository $repository
@@ -41,17 +40,16 @@ class AdminUserController extends  AbstractController {
     }
 
     /**
-     * @param Security $security
-     * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/admin/users", name="admin.users.index")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index ()
+    public function index (): Response
     {
         // get current user
         $currentUser = $this->getUser();
         $id = $currentUser->getId();
         // get all users without current user
-        $users = $this->repository->allUsersWithoutCurrentAdmin($id);
+        $users = $this->repository->allUsersWithoutId($id);
 
         return $this->render('admin/users/index.html.twig', compact('users'));
     }
@@ -67,7 +65,6 @@ class AdminUserController extends  AbstractController {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-
 
        if($form->isSubmitted() && $form->isValid()){
 
@@ -86,9 +83,6 @@ class AdminUserController extends  AbstractController {
         ]);
     }
 
-
-
-
     /**
      * @Route("/admin/user/{id}", name="admin.user.edit", methods="GET|POST")
      * @param User $user
@@ -97,40 +91,20 @@ class AdminUserController extends  AbstractController {
      */
     public function edit(User $user, Request $request): Response
     {
-        $god = false;
-        // verif old password
-        $oldPass = $user->getPassword();
-        $user->setPassword('');
-
-        $SA = $this->getUser()->getRoles();
-
-        if($SA[0] === 'ROLE_SUPER_ADMIN') {
-            $god = true;
-        }
 
         // create form
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            if ($god){
-                $this->em->flush();
-                $this->addFlash('success', 'edit success');
-                return $this->redirectToRoute('admin.property.index');
-            }
-
-            if ($request->get('oldPassword') === $oldPass) {
-                $this->em->flush();
-                $this->addFlash('success', 'edit success');
-                return $this->redirectToRoute('admin.property.index');
-            }
-            $this->addFlash('error', 'Old password not corresponding');
+            $this->em->flush();
+            $this->addFlash('success', 'edit success');
+            return $this->redirectToRoute('admin.property.index');
         }
 
         return $this->render('admin/users/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
-            'god' => $god
         ]);
     }
 

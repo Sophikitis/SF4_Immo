@@ -8,8 +8,11 @@
         <h1>Gerer les biens</h1>
 
         <div class="row">
-            <a href="{{ path('admin.users.index') }}" class="btn btn-primary btn-lg btn-block">Gestion des utilisateurs</a>
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <a href="{{ path('admin.users.index') }}" class="btn btn-primary btn-lg btn-block">Gestion des utilisateurs</a>
+            {% endif %}
             <a href="{{ path('admin.property.index') }}" class="btn btn-primary btn-lg btn-block">Gestion des biens immobiliers</a>
+            <a href="{{ path('admin.option.index') }}" class="btn btn-primary btn-lg btn-block">Gestion des options</a>
         </div>
 
 
