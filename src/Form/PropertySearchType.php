@@ -39,6 +39,7 @@ class PropertySearchType extends AbstractType
                 'multiple' => true,
             ])
             ->add('distance', ChoiceType::class,[
+                'label' => false,
                 'choices' => [
                     '0km' => 0,
                     '10 km' => 10,

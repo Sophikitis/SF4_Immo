@@ -26,3 +26,14 @@ body {
     margin-bottom: 10px;
     border-radius: 10px;
 }
+
+#setbg {
+    background-image: url('/images/bg.jpg');
+}
+
+.wi100 > .form-group span, .wi100 > .form-group input{
+    width: 100%!important;
+}
+.select2-selection{
+    height: 45px!important;
+}

@@ -50,9 +50,10 @@ Encore
     // enables @babel/preset-env polyfills
 
 
-
-
-
+    .autoProvideVariables({
+        'window.jQuery': 'jquery',
+        'jQuery' : 'jquery'
+    })
     // enables Sass/SCSS support
     //.enableSassLoader()
 
@@ -75,3 +76,4 @@ var config = module.exports = Encore.getWebpackConfig();
 config.externals.jquery = 'jQuery';
 
 module.exports = config;
+

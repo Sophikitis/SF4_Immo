@@ -1,0 +1,70 @@
+{% extends 'base.html1.twig' %}
+{% block body %}
+    <!-- Page top section -->
+    <section class="page-top-section set-bg" data-setbg="img/page-top-bg.jpg" style="background-image: url('{{ '/images/page-top-bg.jpg' }}')">
+        <div class="container text-white">
+            <h2>Contact</h2>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="site-breadcrumb">
+        <div class="container">
+            <a href=""><i class="fa fa-home"></i>Home</a>
+            <span><i class="fa fa-angle-right"></i>Blog Grid</span>
+        </div>
+    </div>
+
+    <!-- page -->
+    <section class="page-section blog-page">
+        <div class="container">
+            <div id="map" style="width: 100%; height: 400px" data-lat="45.7579341" data-lng="4.7650814"></div>
+            <div class="contact-info-warp">
+                <p><i class="fa fa-map-marker"></i>4 rue de la pomme, 69001, Lyon</p>
+                <p><i class="fa fa-envelope"></i>contact@next.fr</p>
+                <p><i class="fa fa-phone"></i>(+33) 677 896 349</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <img src="{{ '/images/contact.jpg' }}" alt="" style="height: 100%;object-fit: cover;">
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-right" style="padding-top: 0">
+                        <div class="section-title">
+                            <h3>Get in touch</h3>
+                            <p>Browse houses and flats for sale and to rent in your area</p>
+                        </div>
+                        {{ form_start(form) }}
+
+                        <form class="contact-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {{ form_row(form.firstname) }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form_row(form.lastname) }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form_row(form.email) }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form_row(form.phone) }}
+                                </div>
+                                <div class="col-md-12">
+                                    {{ form_rest(form) }}
+                                    <button class="site-btn justify-content-center" style="display: flex;margin: 0 auto;">SUMMIT NOW</button>
+                                </div>
+                            </div>
+                        </form>
+                        {{ form_end(form) }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- page end -->
+
+
+
+{% endblock %}

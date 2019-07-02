@@ -26,14 +26,26 @@ class ContactNotification{
 
     public function notify(Contact $contact)
     {
-        $message = (new \Swift_Message('Agence : ' . $contact->getProperty()->getTitle()))
-            ->setFrom('noreply@agence.fr')
-            ->setTo('contact@agence.fr')
-            ->setReplyTo($contact->getEmail())
-            ->setBody($this->renderer->render('emails/contact.html.twig', [
-                'contact' => $contact
-            ]), 'text/html'
-            );
+
+        if($contact->getProperty()){
+            $message = (new \Swift_Message('Agence : ' . $contact->getProperty()->getTitle()))
+                ->setFrom('noreply@agence.fr')
+                ->setTo('contact@agence.fr')
+                ->setReplyTo($contact->getEmail())
+                ->setBody($this->renderer->render('emails/contact.html.twig', [
+                    'contact' => $contact
+                ]), 'text/html'
+                );
+        }else {
+            $message = (new \Swift_Message('Agence : Hello'))
+                ->setFrom('noreply@agence.fr')
+                ->setTo('contact@agence.fr')
+                ->setReplyTo($contact->getEmail())
+                ->setBody($this->renderer->render('emails/contactless.html.twig', [
+                    'contact' => $contact
+                ]), 'text/html'
+                );
+        }
 
             $this->mailer->send($message);
     }

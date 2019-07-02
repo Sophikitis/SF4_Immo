@@ -52,7 +52,7 @@ class HomeController extends  AbstractController {
             ]);
         }
 
-        return $this->render('pages/home.html.twig', [
+        return $this->render('pages/home1.html.twig', [
             'properties' => $properties,
             'form'          => $form->createView()
 

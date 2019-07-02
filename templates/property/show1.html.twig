@@ -1,0 +1,192 @@
+{% extends 'base.html1.twig' %}
+{% block body %}
+    <!-- Page top section -->
+    <section class="page-top-section set-bg" data-setbg="img/page-top-bg.jpg" style="background-image: url('{{ '/images/page-top-bg.jpg' }}')">
+        <div class="container text-white">
+            <h2>Single list</h2>
+        </div>
+    </section>
+    <!--  Page top end -->
+
+    <!-- Breadcrumb -->
+    <div class="site-breadcrumb">
+        <div class="container">
+            <a href="{{ path('home') }}"><i class="fa fa-home"></i>Home</a>
+            <span><a href="{{ path('property.index') }}" style="color: #218838"><i class="fa fa-angle-right"></i>Listing</a></span>
+            <span><i class="fa fa-angle-right"></i>{{ property.title }}</span>
+        </div>
+    </div>
+
+
+    <!-- Page -->
+    <section class="page-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 single-list-page">
+                    <div class="single-list-slider owl-carousel " id="sl-slider">
+                        {% if property.pictures is empty %}
+                            <div class="sl-item set-bg" data-setbg="{{ asset('/images/page-top-bg.jpg') }}" style="background-image: url('{{ '/images/properties/empty.jpg' | imagine_filter('medium') }}')">
+                                <div class="sale-notic">FOR SALE</div>
+                            </div>
+                        {% else %}
+                            {% for picture in property.pictures %}
+                                <div class="sl-item set-bg" data-setbg="{{ '/images/page-top-bg.jpg' }}" style="background-image: url('{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}')">
+                                    <div class="sale-notic">FOR SALE</div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
+               {#     <div class="owl-carousel sl-thumb-slider" id="sl-slider-thumb">
+                        <div class="sl-thumb set-bg" data-setbg="{{ '/images/page-top-bg.jpg' }}"></div>
+                        <div class="sl-thumb set-bg" data-setbg="{{ '/images/page-top-bg.jpg' }}"></div>
+                    </div>#}
+                    <div class="owl-carousel sl-thumb-slider" id="sl-slider-thumb">
+                        {% if property.pictures is empty %}
+                            <div class="sl-thumb set-bg" data-setbg="img/single-list-slider/1.jpg" style="background-image: url('{{ '/images/properties/empty.jpg' | imagine_filter('medium') }}')"></div>
+                        {% else %}
+                            {% for picture in property.pictures %}
+                                <div class="sl-thumb set-bg" data-setbg="img/single-list-slider/1.jpg" style="background-image: url('{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}')"></div>
+                            {% endfor %}
+                        {% endif %}
+
+
+
+                    </div>
+                    <div class="single-list-content">
+                        <div class="row">
+                            <div class="col-xl-8 sl-title">
+                                <h2>{{ property.title }}</h2>
+                                <p><i class="fa fa-map-marker"></i>{{ property.city }}, {{ property.postalCode }}</p>
+                            </div>
+                            <div class="col-xl-4">
+                                <a href="#" class="price-btn">{{ property.formatedPrice }}€</a>
+                            </div>
+                        </div>
+                        <h3 class="sl-sp-title">Property Details</h3>
+                        <div class="row property-details-list">
+                            <div class="col-md-4 col-sm-6">
+                                <p><i class="fa fa-th-large"></i> 1500 Square foot</p>
+                                <p><i class="fa fa-bed"></i> 16 Bedrooms</p>
+                                <p><i class="fa fa-user"></i> Gina Wesley</p>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <p><i class="fa fa-car"></i> 2 Garages</p>
+                                <p><i class="fa fa-building-o"></i> Family Villa</p>
+                                <p><i class="fa fa-clock-o"></i> 1 days ago</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><i class="fa fa-bath"></i> 8 Bathrooms</p>
+                                <p><i class="fa fa-trophy"></i> 5 years age</p>
+                            </div>
+                        </div>
+                        <h3 class="sl-sp-title">Description</h3>
+                        <div class="description">
+                            <p>{{ property.description }}</p>
+                        </div>
+                        <h3 class="sl-sp-title">Property Details</h3>
+                        <div class="row property-details-list">
+                            <div class="col-md-4 col-sm-6">
+                                <p><i class="fa fa-check-circle-o"></i> Air conditioning</p>
+                                <p><i class="fa fa-check-circle-o"></i> Telephone</p>
+                                <p><i class="fa fa-check-circle-o"></i> Laundry Room</p>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <p><i class="fa fa-check-circle-o"></i> Central Heating</p>
+                                <p><i class="fa fa-check-circle-o"></i> Family Villa</p>
+                                <p><i class="fa fa-check-circle-o"></i> Metro Central</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><i class="fa fa-check-circle-o"></i> City views</p>
+                                <p><i class="fa fa-check-circle-o"></i> Internet</p>
+                                <p><i class="fa fa-check-circle-o"></i> Electric Range</p>
+                            </div>
+                        </div>
+                        <h3 class="sl-sp-title bd-no">Floorplans</h3>
+                        <div id="accordion" class="plan-accordion">
+                            <div class="panel">
+                                <div class="panel-header" id="headingOne">
+                                    <button class="panel-link active" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">First Floor: <span>660 sq ft</span>	<i class="fa fa-angle-down"></i></button>
+                                </div>
+                                <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="panel-body">
+                                        <img src="img/plan-sketch.jpg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel">
+                                <div class="panel-header" id="headingTwo">
+                                    <button class="panel-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">Second Floor:<span>610 sq ft.</span>	<i class="fa fa-angle-down"></i>
+                                    </button>
+                                </div>
+                                <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                    <div class="panel-body">
+                                        <img src="img/plan-sketch.jpg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel">
+                                <div class="panel-header" id="headingThree">
+                                    <button class="panel-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">Third Floor :<span>580 sq ft</span>	<i class="fa fa-angle-down"></i>
+                                    </button>
+                                </div>
+                                <div id="collapse3" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                    <div class="panel-body">
+                                        <img src="img/plan-sketch.jpg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <h3 class="sl-sp-title bd-no">Location</h3>
+                        <div id="map" style="width: 100%; height: 400px" data-lat="{{ property.lat }}" data-lng="{{ property.lng }}"></div>
+
+{#
+                        <div class="pos-map" id="map-canvas"></div>
+#}
+
+                    </div>
+                </div>
+
+
+                <!-- sidebar -->
+                <div class="col-lg-4 col-md-7 sidebar">
+                    <div class="author-card">
+                        <div class="author-img set-bg set-img" data-setimg="{{ '/images/me.jpg' }}"></div>
+                        <div class="author-info">
+                            <h5>Jeremie Sophikitis</h5>
+                            <p>Real Estate Agent</p>
+                        </div>
+                        <div class="author-contact">
+                            <p><i class="fa fa-phone"></i>(+33) 677 896 349</p>
+                            <p><i class="fa fa-envelope"></i>sophikitis@next.fr</p>
+                        </div>
+                    </div>
+                    <div class="contact-form-card">
+                        <h5>Do you have any question?</h5>
+                        {{ form_start(form) }}
+
+                        {{ form_row(form.firstname) }}
+                        {{ form_row(form.lastname) }}
+                        {{ form_row(form.phone) }}
+                        {{ form_row(form.email) }}
+                        {{ form_rest(form) }}
+
+
+
+
+                        <button>SEND</button>
+                        {{ form_end(form) }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page end -->
+
+
+
+{% endblock %}
+
