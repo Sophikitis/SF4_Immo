@@ -6,7 +6,6 @@
 {% block body %}
 
 
-    // TODO : FIX TOASTER
     {% for message in app.flashes('success') %}
         <script>
             window.toastr = toastr;
@@ -34,9 +33,9 @@
     <!-- Hero section -->
     <section class="hero-section set-bg" id="setbg" data-setbg="./images/bg.jpg">
         <div class="container hero-text text-white">
-            <h2>find your place with our local life style</h2>
-            <p>Search real estate property records, houses, condos, land and more on leramiz.com®.<br>Find property info from the most comprehensive source data.</p>
-            <a href="#" class="site-btn">VIEW DETAIL</a>
+            <h2>Votre futur chez vous ce trouve ic</h2>
+            <p>Decouvrez nos differents biens immobilier sur notre site <br> ou bien dans nos 50 agences dans toute la france </p>
+            <a href="#" class="site-btn">EN SAVOIR PLUS</a>
         </div>
     </section>
     <!-- Hero section end -->
@@ -47,14 +46,14 @@
         <div class="container">
             <form class="filter-form">
                 {{ form_start(form) }}
-                <div class="row">
+                <div class="row justify-content-center">
                     <div class="col">
                         <input type="text" value="" placeholder="Lieux" id="search_address" style="width: 100%;" class="form-control">
                     </div>
-                    <div class="col wi100">
+                    <div class="col noWidth">
                         {{ form_row(form.distance) }}
                     </div>
-                    <button class="site-btn fs-submit">SEARCH</button>
+                    <button class="site-btn fs-submit">RECHERCHER</button>
                 </div>
 
                 <div class="hidden" style="display: none">
@@ -71,8 +70,8 @@
     <section class="properties-section spad">
         <div class="container">
             <div class="section-title text-center">
-                <h3>RECENT PROPERTIES</h3>
-                <p>Discover how much the latest properties have been sold for</p>
+                <h3>Les ajouts récents</h3>
+                <p>Decouvrez les derniers biens rajoutés</p>
             </div>
             <div class="row">
                 {% for property in properties %}

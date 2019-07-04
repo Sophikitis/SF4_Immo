@@ -6,6 +6,9 @@
 {% block body %}
     <div class="container mt-4">
         <h1>Gerer les biens</h1>
+        <div class="text-right">
+            <a href="{{ path('admin.property.new')}}" class="btn btn-primary">Creer un bien</a>
+        </div>
 
         {% for message in app.flashes('success') %}
             <div class="alert alert-success">
@@ -37,9 +40,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        <div class="text-right">
-            <a href="{{ path('admin.property.new')}}" class="btn btn-primary">Creer un bien</a>
-        </div>
+
     </div>
 
 

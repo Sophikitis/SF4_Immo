@@ -31,7 +31,20 @@ body {
     background-image: url('/images/bg.jpg');
 }
 
-.wi100 > .form-group span, .wi100 > .form-group input{
+.select2-container{
+    width: 100% !important;
+}
+
+.noWidth select {
+    width: 100%!important;
+    -webkit-appearance: none;
+    height: 46px!important;
+    border-radius: 0;
+}
+.noWidth {
+    height: 46px;
+}
+ .wi100 > .form-group input{
     width: 100%!important;
 }
 .select2-selection{

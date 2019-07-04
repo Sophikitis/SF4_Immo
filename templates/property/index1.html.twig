@@ -4,18 +4,27 @@
 
 
 
+
+
     <!-- Page top section -->
     <section class="page-top-section set-bg" data-setbg="img/page-top-bg.jpg" style="background-image: url('{{ 'images/page-top-bg.jpg' }}')">
         <div class="container text-white">
-            <h2>Featured Listings</h2>
+            <h2>Nos biens immobiliers</h2>
         </div>
     </section>
     <!--  Page top end -->
 
+
+
+
+
+
+
+
     <!-- Filter form section -->
     <div class="filter-search">
         <div class="container-fluid" style="background-color: #30caa0">
-            <form class="filter-form container">
+            <div class="filter-form container">
                 {{ form_start(form) }}
                 <div class="row">
                     <div class="col wi100">
@@ -24,22 +33,22 @@
                     <div class="col wi100">
                         {{ form_row(form.maxPrice) }}
                     </div>
-                    <div class="col wi100 select">
-                        {{ form_row(form.options) }}
+                    <div class="col-5 wi100">
+                        {{ form_row(form.options, {'attr': {'class': 'select'}}) }}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <input type="text" value="" placeholder="Lieux" id="search_address" style="width: 100%;" class="form-control">
                     </div>
-                    <div class="col wi100">
+                    <div class="col noWidth">
                         {{ form_row(form.distance) }}
                     </div>
                     <button class="site-btn fs-submit">SEARCH</button>
                 </div>
                 {{ form_end(form) }}
 
-            </form>
+            </div>
         </div>
     </div>
     <!-- Filter form section end -->

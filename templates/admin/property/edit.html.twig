@@ -1,5 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html1.twig' %}
 {% block body %}
+
+    <!-- Page top section -->
+    <section class="page-top-section set-bg" data-setbg="img/page-top-bg.jpg" style="background-image: url('{{ '/images/page-top-bg.jpg' }}')">
+        <div class="container text-white">
+            <h2>Detail du bien</h2>
+        </div>
+    </section>
+    <!--  Page top end -->
+
+
     <div class="container mt-4">
         <h2>Editer le biens</h2>
        {{  include('admin/property/_form.html.twig', { form: form, button: 'Editer'}) }}
